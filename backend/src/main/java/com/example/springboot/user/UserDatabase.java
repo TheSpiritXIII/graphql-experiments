@@ -9,6 +9,7 @@ final class UserDatabase extends Database<User> {
 		User user = new User();
 		user.name = faker.name().fullName();
 		user.email = user.name.replaceAll("\\s", ".") + "@example.com";
+		user.addressId = (long) this.getAll().size();
 		return user;
 	}
 

@@ -1,9 +1,10 @@
 package com.example.springboot.user;
 
-import graphql.annotations.annotationTypes.GraphQLField;
-import graphql.annotations.annotationTypes.GraphQLName;
+import com.example.springboot.address.Address;
+import com.example.springboot.address.AddressQuery;
 
-@GraphQLName("user")
+import graphql.annotations.annotationTypes.GraphQLField;
+
 public class User {
 	@GraphQLField
 	public Long id;
@@ -13,4 +14,11 @@ public class User {
 
 	@GraphQLField
 	public String email;
+
+	public Long addressId;
+
+	@GraphQLField
+	public Address address() {
+		return AddressQuery.getById(this.addressId);
+	}
 }
