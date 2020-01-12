@@ -1,0 +1,34 @@
+{
+  first: UserQuery {
+    get(id: "1") {
+      name
+      email
+      address {
+        country
+      }
+    }
+  }
+  second: UserQuery {
+    get(id: "2") {
+      name
+      email
+      address {
+        country
+      }
+    }
+  }
+  all: UserQuery {
+    getAll {
+      name
+      address {
+        country
+        city
+      }
+    }
+  },
+  addresses: AddressQuery {
+    getByCountry(country: "United States") {
+      city
+    }
+  }
+}

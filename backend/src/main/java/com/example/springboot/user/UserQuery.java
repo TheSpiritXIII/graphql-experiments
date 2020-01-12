@@ -2,12 +2,12 @@ package com.example.springboot.user;
 
 import java.util.List;
 
-import com.example.springboot.schema.GraphQLQuery;
+import com.example.springboot.graphql.namespace.GraphQLNamespace;
 
 import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLName;
 
-@GraphQLQuery
+@GraphQLNamespace(type = GraphQLNamespace.Type.Query)
 public class UserQuery {
 	private final static UserDatabase userDatabase = new UserDatabase();
 

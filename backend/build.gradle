@@ -33,6 +33,7 @@ dependencies {
 
 	// Other
 	implementation group: 'info.picocli', name: 'picocli', version: '4.1.4'
+	implementation group: 'io.github.classgraph', name: 'classgraph', version: '4.8.60'
 }
 
 test {

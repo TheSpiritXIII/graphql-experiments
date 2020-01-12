@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-import com.example.springboot.schema.GraphQLSchemaLoader;
+import com.example.springboot.graphql.schema.GraphQLSchemaComponent;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,7 +26,7 @@ public class Application {
 		if (commandLineArguments.schemaFile != null) {
 			try (PrintWriter writer = new PrintWriter(commandLineArguments.schemaFile)) {
 				final var schemaPrinter  = new SchemaPrinter();
-				writer.println(schemaPrinter.print(GraphQLSchemaLoader.getSchema()));
+				writer.println(schemaPrinter.print(new GraphQLSchemaComponent().getSchema()));
 			} catch (FileNotFoundException ex) {
 				System.exit(1);
 			}

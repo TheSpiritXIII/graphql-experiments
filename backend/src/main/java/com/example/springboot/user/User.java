@@ -1,6 +1,5 @@
 package com.example.springboot.user;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
@@ -8,11 +7,13 @@ import java.util.stream.Collectors;
 
 import com.example.springboot.address.Address;
 import com.example.springboot.address.AddressQuery;
+import com.example.springboot.graphql.loader.GraphQLDataLoader;
+import com.example.springboot.graphql.loader.GraphQLDataLoaderHelper;
+import com.example.springboot.graphql.loader.GraphQLDataLoaderRegister;
 
 import org.dataloader.BatchLoader;
 import org.dataloader.DataLoader;
 
-import graphql.annotations.annotationTypes.GraphQLBatched;
 import graphql.annotations.annotationTypes.GraphQLDataFetcher;
 import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.schema.DataFetcher;
@@ -40,19 +41,22 @@ public class User {
 		@Override
 		public CompletableFuture<Address> get(DataFetchingEnvironment environment) throws Exception {
 			User user = environment.getSource();
-			DataLoader<Long, Address> dataLoader = environment.getDataLoader("userAddress");
+			DataLoader<Long, Address> dataLoader = GraphQLDataLoaderHelper.getDataLoader(AddressDataLoader.class, environment);
 			return dataLoader.load(user.addressId);
 		}
 	}
 
-	public static class AddressBatchLoader implements BatchLoader<Long, Address> {
+	@GraphQLDataLoaderRegister(name = "AddressDataLoader")
+	public static class AddressDataLoader implements GraphQLDataLoader<Long, Address> {
 		@Override
-		public CompletionStage<List<Address>> load(List<Long> addressIdList) {
-			return CompletableFuture.supplyAsync(() -> {
-				return addressIdList.stream().map((addressId) -> {
-					return AddressQuery.getById(addressId);
-				}).collect(Collectors.toList());
+		public DataLoader<Long, Address> get() {
+			return DataLoader.newDataLoader((addressIdList) -> {
+				return CompletableFuture.supplyAsync(() -> {
+					return addressIdList.stream().map((addressId) -> {
+						return AddressQuery.getById(addressId);
+					}).collect(Collectors.toList());
+				});
 			});
 		}
-	};
+	}
 }
