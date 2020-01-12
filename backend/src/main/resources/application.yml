@@ -1,0 +1,21 @@
+graphql:
+  servlet:
+    mapping: /graphql
+    enabled: true
+    corsEnabled: true
+altair:
+  enabled: true
+  cdn:
+    enabled: false
+graphiql:
+  enabled: true
+  cdn:
+    enabled: false
+voyager:
+  enabled: true
+  cdn:
+    enabled: false
+graphql.playground:
+  enabled: true
+  cdn:
+    enabled: false
