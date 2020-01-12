@@ -25,6 +25,8 @@ dependencies {
 	implementation 'com.graphql-java-kickstart:graphiql-spring-boot-starter:6.0.1'
 	implementation 'com.graphql-java-kickstart:voyager-spring-boot-starter:6.0.1'
 	implementation "io.github.graphql-java:graphql-java-annotations:7.2.1"
+	implementation group: 'com.graphql-java', name: 'java-dataloader', version: '2.2.3'
+
 
 	// Mocking
 	implementation 'com.github.javafaker:javafaker:1.0.1'
