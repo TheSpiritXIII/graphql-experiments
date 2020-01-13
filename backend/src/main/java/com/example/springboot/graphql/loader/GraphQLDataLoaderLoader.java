@@ -16,7 +16,7 @@ public class GraphQLDataLoaderLoader {
 	private final DataLoaderRegistry dataLoaderRegistry;
 
 	public GraphQLDataLoaderLoader() throws Exception {
-		this(new ClassGraph().enableAllInfo());
+		this(new ClassGraph().enableAnnotationInfo());
 	}
 	
 	public GraphQLDataLoaderLoader(ClassGraph classGraph) throws Exception {

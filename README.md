@@ -7,6 +7,7 @@ The entire GraphQL schema is typed via annotations on the Java-side. From there,
 To run the backend, run:
 ```bash
 cd backend
+./gradlew bootRun --args="--schema build/schema.graphql"
 ./gradlew bootRun
 ```
 

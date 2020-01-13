@@ -14,7 +14,7 @@ public class GraphQLNamespaceLoader {
 	public final List<Class<?>> subscriptionClassList = new LinkedList<>();
 
 	public GraphQLNamespaceLoader() {
-		this(new ClassGraph().enableAllInfo());
+		this(new ClassGraph().enableAnnotationInfo());
 	}
 
 	public GraphQLNamespaceLoader(ClassGraph classGraph) {

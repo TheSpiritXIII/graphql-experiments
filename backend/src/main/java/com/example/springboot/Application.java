@@ -30,6 +30,7 @@ public class Application {
 			} catch (FileNotFoundException ex) {
 				System.exit(1);
 			}
+			System.exit(0);
 		}
 		SpringApplication.run(Application.class, args);
 	}
