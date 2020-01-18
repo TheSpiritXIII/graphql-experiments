@@ -27,6 +27,8 @@ public class GraphQLContextBuilder implements GraphQLServletContextBuilder {
 
 	@Override
 	public GraphQLContext build(HttpServletRequest req, HttpServletResponse response) {
+		// Force creating of a session. Must be done before creating servlet context.
+		req.getSession();
 		return DefaultGraphQLServletContext.createServletContext(this.dataLoaderRegistry, null)
 			.with(req)
 			.with(response)

@@ -3,7 +3,7 @@ package com.example.springboot.user;
 import com.example.springboot.util.Database;
 import com.github.javafaker.Faker;
 
-final class UserDatabase extends Database<User> {
+public final class UserDatabase extends Database<User> {
 	@Override
 	protected User generate(Faker faker) {
 		User user = new User();

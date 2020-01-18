@@ -1,9 +1,6 @@
 package com.example.springboot.user;
 
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
-import java.util.stream.Collectors;
 
 import com.example.springboot.address.Address;
 import com.example.springboot.address.AddressQuery;
@@ -11,7 +8,6 @@ import com.example.springboot.graphql.loader.GraphQLDataLoader;
 import com.example.springboot.graphql.loader.GraphQLDataLoaderHelper;
 import com.example.springboot.graphql.loader.GraphQLDataLoaderRegister;
 
-import org.dataloader.BatchLoader;
 import org.dataloader.DataLoader;
 
 import graphql.annotations.annotationTypes.GraphQLDataFetcher;
@@ -51,10 +47,9 @@ public class User {
 		@Override
 		public DataLoader<Long, Address> get() {
 			return DataLoader.newDataLoader((addressIdList) -> {
+				System.out.println("Batching address lookup of length: " + addressIdList.size());
 				return CompletableFuture.supplyAsync(() -> {
-					return addressIdList.stream().map((addressId) -> {
-						return AddressQuery.getById(addressId);
-					}).collect(Collectors.toList());
+					return AddressQuery.ADDRESS_DATABASE.getByIdBatch(addressIdList);
 				});
 			});
 		}

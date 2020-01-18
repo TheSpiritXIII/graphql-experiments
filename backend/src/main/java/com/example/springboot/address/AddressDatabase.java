@@ -3,7 +3,7 @@ package com.example.springboot.address;
 import com.example.springboot.util.Database;
 import com.github.javafaker.Faker;
 
-final class AddressDatabase extends Database<Address> {
+final public class AddressDatabase extends Database<Address> {
 	@Override
 	protected Address generate(Faker faker) {
 		Address address = new Address();
