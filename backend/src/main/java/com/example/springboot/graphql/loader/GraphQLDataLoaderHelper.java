@@ -6,6 +6,10 @@ import graphql.schema.DataFetchingEnvironment;
 
 public class GraphQLDataLoaderHelper {
 	public static <K, V> DataLoader<K, V> getDataLoader(Class<? extends GraphQLDataLoader<K, V>> loaderClass, DataFetchingEnvironment environment) {
-		return environment.getDataLoader(GraphQLDataLoaderLoader.getDataLoaderName(loaderClass));
+		String dataLoaderName = GraphQLDataLoaderScanner.getDataLoaderName(loaderClass);
+		if (dataLoaderName == null) {
+			throw new NullPointerException("Unable to find data loader for class: " + loaderClass);
+		}
+		return environment.getDataLoader(dataLoaderName);
 	}
 }

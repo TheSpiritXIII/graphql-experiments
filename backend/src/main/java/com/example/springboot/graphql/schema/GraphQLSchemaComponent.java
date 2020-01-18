@@ -3,7 +3,7 @@ package com.example.springboot.graphql.schema;
 import java.util.List;
 
 import com.example.springboot.graphql.namespace.GraphQLNamespaceBuilder;
-import com.example.springboot.graphql.namespace.GraphQLNamespaceLoader;
+import com.example.springboot.graphql.namespace.GraphQLNamespaceScanner;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -23,7 +23,7 @@ public class GraphQLSchemaComponent {
 			.getContainer()
 			.getCodeRegistryBuilder();
 
-		final GraphQLNamespaceLoader namespaceLoader = new GraphQLNamespaceLoader();
+		final GraphQLNamespaceScanner namespaceLoader = new GraphQLNamespaceScanner();
 		final List<Class<?>> queryClassList = namespaceLoader.queryClassList;
 		GraphQLObjectType query = GraphQLNamespaceBuilder
 			.buildQuery(graphQlAnnotations, codeRegistryBuilder, queryClassList)

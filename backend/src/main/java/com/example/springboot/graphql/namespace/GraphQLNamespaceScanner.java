@@ -8,16 +8,16 @@ import io.github.classgraph.ClassInfo;
 import io.github.classgraph.ClassInfoList;
 import io.github.classgraph.ScanResult;
 
-public class GraphQLNamespaceLoader {
+public class GraphQLNamespaceScanner {
 	public final List<Class<?>> queryClassList = new LinkedList<>();
 	public final List<Class<?>> mutationClassList = new LinkedList<>();
 	public final List<Class<?>> subscriptionClassList = new LinkedList<>();
 
-	public GraphQLNamespaceLoader() {
+	public GraphQLNamespaceScanner() {
 		this(new ClassGraph().enableAnnotationInfo());
 	}
 
-	public GraphQLNamespaceLoader(ClassGraph classGraph) {
+	public GraphQLNamespaceScanner(ClassGraph classGraph) {
 		try (ScanResult scanResult = classGraph.scan()) {
 			final String annotationName = GraphQLNamespace.class.getName();
 			ClassInfoList classInfoList = scanResult.getClassesWithAnnotation(annotationName);

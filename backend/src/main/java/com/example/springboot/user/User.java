@@ -46,7 +46,7 @@ public class User {
 		}
 	}
 
-	@GraphQLDataLoaderRegister(name = "AddressDataLoader")
+	@GraphQLDataLoaderRegister
 	public static class AddressDataLoader implements GraphQLDataLoader<Long, Address> {
 		@Override
 		public DataLoader<Long, Address> get() {

@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.websocket.Session;
 import javax.websocket.server.HandshakeRequest;
 
-import com.example.springboot.graphql.loader.GraphQLDataLoaderLoader;
+import com.example.springboot.graphql.loader.GraphQLDataLoaderScanner;
 
 import org.dataloader.DataLoaderRegistry;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,7 @@ public class GraphQLContextBuilder implements GraphQLServletContextBuilder {
 	private final DataLoaderRegistry dataLoaderRegistry;
 
 	public GraphQLContextBuilder() throws Exception {
-		GraphQLDataLoaderLoader dataLoader = new GraphQLDataLoaderLoader();
+		GraphQLDataLoaderScanner dataLoader = new GraphQLDataLoaderScanner();
 		this.dataLoaderRegistry = dataLoader.getDataLoaderRegistry();
 	}
 
