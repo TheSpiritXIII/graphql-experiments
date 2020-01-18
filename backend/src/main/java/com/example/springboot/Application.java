@@ -21,11 +21,11 @@ public class Application {
 	}
 
 	public static void main(String[] args) {
-		final var commandLineArguments = new CommandLineArguments();
+		final CommandLineArguments commandLineArguments = new CommandLineArguments();
 		new CommandLine(commandLineArguments).parseArgs(args);
 		if (commandLineArguments.schemaFile != null) {
 			try (PrintWriter writer = new PrintWriter(commandLineArguments.schemaFile)) {
-				final var schemaPrinter  = new SchemaPrinter();
+				final SchemaPrinter schemaPrinter  = new SchemaPrinter();
 				writer.println(schemaPrinter.print(new GraphQLSchemaComponent().getSchema()));
 			} catch (FileNotFoundException ex) {
 				System.exit(1);

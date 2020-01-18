@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.example'
 version = '1.0.0-SNAPSHOT'
-sourceCompatibility = '1.11'
+sourceCompatibility = '1.8'
 
 repositories {
 	mavenCentral()
@@ -20,16 +20,15 @@ dependencies {
 	}
 
 	// GraphQL
-	implementation 'com.graphql-java-kickstart:graphql-spring-boot-starter:6.0.1'
-	implementation 'com.graphql-java-kickstart:altair-spring-boot-starter:6.0.1'
-	implementation 'com.graphql-java-kickstart:graphiql-spring-boot-starter:6.0.1'
-	implementation 'com.graphql-java-kickstart:voyager-spring-boot-starter:6.0.1'
-	implementation "io.github.graphql-java:graphql-java-annotations:7.2.1"
+	implementation group: 'com.graphql-java-kickstart', name: 'graphql-spring-boot-starter', version: '6.0.1'
+	implementation group: 'com.graphql-java-kickstart', name: 'altair-spring-boot-starter', version: '6.0.1'
+	implementation group: 'com.graphql-java-kickstart', name: 'graphiql-spring-boot-starter', version: '6.0.1'
+	implementation group: 'com.graphql-java-kickstart', name: 'voyager-spring-boot-starter', version: '6.0.1'
+	implementation group: 'io.github.graphql-java', name: 'graphql-java-annotations', version: '7.2.1'
 	implementation group: 'com.graphql-java', name: 'java-dataloader', version: '2.2.3'
 
-
 	// Mocking
-	implementation 'com.github.javafaker:javafaker:1.0.1'
+	implementation group: 'com.github.javafaker', name: 'javafaker', version: '1.0.1'
 
 	// Other
 	implementation group: 'info.picocli', name: 'picocli', version: '4.1.4'

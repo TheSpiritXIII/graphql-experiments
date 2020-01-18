@@ -17,7 +17,7 @@ class SchemaController {
 
 	@RequestMapping(path = "/schema", produces = { MediaType.TEXT_PLAIN_VALUE })
 	String getSchema() {
-		final var schemaPrinter = new SchemaPrinter();
+		final SchemaPrinter schemaPrinter = new SchemaPrinter();
 		return schemaPrinter.print(this.schema);
 	}
 }
