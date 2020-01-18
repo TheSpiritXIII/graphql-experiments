@@ -15,8 +15,12 @@ public abstract class Database<TData> {
 	private final List<TData> dataList = new LinkedList<>();
 
 	public Database() {
+		this(5);
+	}
+
+	public Database(int amount) {
 		Faker faker = new Faker(new Random(seed));
-		for (int i = 0; i < 5; i += 1) {
+		for (int i = 0; i < amount; i += 1) {
 			add(generate(faker));
 		}
 	}
@@ -33,6 +37,10 @@ public abstract class Database<TData> {
 
 	public TData getById(long id) {
 		return findBy(getIdPredicate(id));
+	}
+
+	public List<TData> findAll(Predicate<? super TData> predicate) {
+		return this.dataList.stream().filter(predicate).collect(Collectors.toList());
 	}
 
 	public TData findBy(Predicate<? super TData> predicate) {

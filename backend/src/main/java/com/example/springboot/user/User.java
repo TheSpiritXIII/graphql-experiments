@@ -1,9 +1,11 @@
 package com.example.springboot.user;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import com.example.springboot.address.Address;
 import com.example.springboot.address.AddressQuery;
+import com.example.springboot.comment.Comment;
 import com.example.springboot.graphql.loader.GraphQLDataLoader;
 import com.example.springboot.graphql.loader.GraphQLDataLoaderHelper;
 import com.example.springboot.graphql.loader.GraphQLDataLoaderRegister;
@@ -53,5 +55,13 @@ public class User {
 				});
 			});
 		}
+	}
+
+	@GraphQLField
+	@GraphQLDataFetcher(AddressDataFetcher.class)
+	public List<Comment> comments() {
+		return UserQuery.COMMENT_DATABASE.findAll((comment) -> {
+			return comment.getUserId() == this.id;
+		});
 	}
 }

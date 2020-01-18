@@ -6,6 +6,7 @@ import java.util.concurrent.CompletableFuture;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.example.springboot.comment.CommentDatabase;
 import com.example.springboot.graphql.loader.GraphQLDataLoader;
 import com.example.springboot.graphql.loader.GraphQLDataLoaderHelper;
 import com.example.springboot.graphql.loader.GraphQLDataLoaderRegister;
@@ -23,6 +24,7 @@ import graphql.servlet.context.DefaultGraphQLServletContext;
 @GraphQLNamespace(type = GraphQLNamespace.Type.Query)
 public class UserQuery {
 	public final static UserDatabase USER_DATABASE = new UserDatabase();
+	public final static CommentDatabase COMMENT_DATABASE = new CommentDatabase(10);
 
 	@GraphQLField
 	public static List<User> getAll() {
