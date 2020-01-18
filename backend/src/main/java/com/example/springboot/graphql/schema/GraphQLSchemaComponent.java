@@ -1,7 +1,10 @@
 package com.example.springboot.graphql.schema;
 
 import java.util.List;
+import java.util.Map.Entry;
 
+import com.example.springboot.graphql.mixin.GraphQLMixinHelper;
+import com.example.springboot.graphql.mixin.GraphQLMixinScanner;
 import com.example.springboot.graphql.namespace.GraphQLNamespaceBuilder;
 import com.example.springboot.graphql.namespace.GraphQLNamespaceScanner;
 
@@ -17,11 +20,14 @@ import graphql.schema.GraphQLSchema;
 public class GraphQLSchemaComponent {
 	private final GraphQLSchema schema;
 
-	public GraphQLSchemaComponent() {
+	public GraphQLSchemaComponent() throws Exception {
 		final GraphQLAnnotations graphQlAnnotations = new GraphQLAnnotations();
-		final GraphQLCodeRegistry.Builder codeRegistryBuilder = graphQlAnnotations
-			.getContainer()
-			.getCodeRegistryBuilder();
+		final GraphQLCodeRegistry.Builder codeRegistryBuilder = graphQlAnnotations.getContainer()
+				.getCodeRegistryBuilder();
+
+		for (Entry<Class<?>, Class<?>> mixinEntry : GraphQLMixinScanner.scan().entrySet()) {
+			GraphQLMixinHelper.register(graphQlAnnotations, mixinEntry.getKey(), mixinEntry.getValue());
+		}
 
 		final GraphQLNamespaceScanner namespaceLoader = new GraphQLNamespaceScanner();
 		final List<Class<?>> queryClassList = namespaceLoader.queryClassList;

@@ -20,7 +20,7 @@ public class Application {
 		private File schemaFile;
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		final CommandLineArguments commandLineArguments = new CommandLineArguments();
 		new CommandLine(commandLineArguments).parseArgs(args);
 		if (commandLineArguments.schemaFile != null) {
