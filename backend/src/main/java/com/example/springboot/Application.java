@@ -5,11 +5,12 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
 import com.example.springboot.graphql.schema.GraphQLSchemaComponent;
+import com.example.springboot.graphql.schema.GraphQLSchemaController;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import graphql.schema.idl.SchemaPrinter;
+import graphql.schema.GraphQLSchema;
 import picocli.CommandLine;
 import picocli.CommandLine.Option;
 
@@ -24,9 +25,10 @@ public class Application {
 		final CommandLineArguments commandLineArguments = new CommandLineArguments();
 		new CommandLine(commandLineArguments).parseArgs(args);
 		if (commandLineArguments.schemaFile != null) {
+			final GraphQLSchema schema = new GraphQLSchemaComponent().getSchema();
+			final GraphQLSchemaController schemaController = new GraphQLSchemaController(schema);
 			try (PrintWriter writer = new PrintWriter(commandLineArguments.schemaFile)) {
-				final SchemaPrinter schemaPrinter  = new SchemaPrinter();
-				writer.println(schemaPrinter.print(new GraphQLSchemaComponent().getSchema()));
+				writer.println(schemaController.getSchema());
 			} catch (FileNotFoundException ex) {
 				System.exit(1);
 			}
