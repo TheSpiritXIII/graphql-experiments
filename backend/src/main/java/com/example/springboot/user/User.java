@@ -58,7 +58,6 @@ public class User {
 	}
 
 	@GraphQLField
-	@GraphQLDataFetcher(AddressDataFetcher.class)
 	public List<Comment> comments() {
 		return UserQuery.COMMENT_DATABASE.findAll((comment) -> {
 			return comment.getUserId() == this.id;

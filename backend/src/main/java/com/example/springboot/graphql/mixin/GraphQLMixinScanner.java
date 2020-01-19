@@ -29,6 +29,7 @@ public class GraphQLMixinScanner {
 				}
 			}
 		}
+		System.out.println("Found " + mixinMap.size() + " mixins");
 		return mixinMap;
 	}
 }
